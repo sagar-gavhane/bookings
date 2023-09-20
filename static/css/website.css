@@ -1,0 +1,41 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Merriweather", serif;
+}
+
+.site {
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 400px;
+  justify-content: center;
+  margin: 32px 0px;
+  margin-top: 64px;
+  text-align: center;
+}
+
+.hero h1 {
+  color: #176b87;
+  margin-bottom: 0px;
+}
+
+.content {
+}

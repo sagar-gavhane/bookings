@@ -1,31 +1,59 @@
 {{define "base"}}
-    <!doctype html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-              integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-              crossorigin="anonymous">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookings App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./static/css/website.css" rel="stylesheet" />
 
-        {{block "css" .}}
+    {{block "css" .}}
 
-        {{end}}
-    </head>
-    <body>
+    {{
+      end
+    }}
+  </head>
 
-    {{block "content" .}}
+  <body>
+    <div class="site">
+      <ul class="nav">
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/about">About</a>
+        </li>
+        <li>
+          <a href="/generals-quarters">General's Quarters</a>
+        </li>
+        <li>
+          <a href="/majors-suite">Major's Suite</a>
+        </li>
+        <li>
+          <a href="/make-reservation">Book Now</a>
+        </li>
+        <li>
+          <a href="/contact">Contact</a>
+        </li>
+      </ul>
+      <div class="content">
+        {{block "content" .}}
 
-    {{end}}
+        {{ end }}
 
+        {{block "js" .}}
 
-    {{block "js" .}}
-
-    {{end}}
-
-    </body>
-    </html>
-{{end}}
+        {{ end }}
+      </div>
+    </div>
+  </body>
+</html>
+{{ end }}
