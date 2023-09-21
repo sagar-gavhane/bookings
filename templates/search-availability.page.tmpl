@@ -2,4 +2,30 @@
 
 {{ define "content" }}
 
+<form
+  class="search-availability-form"
+  action="/search-availability"
+  method="post"
+>
+  <h2>Search for Availability</h2>
+  <input
+    type="hidden"
+    name="csrf_token"
+    id="csrf_token"
+    value="{{.CSRFToken}}"
+  />
+  <div class="form-control">
+    <label for="arrival">Arrival</label>
+    <input type="date" name="arrival" id="arrival" />
+  </div>
+  <div class="form-control">
+    <label for="departure">Departure:</label>
+    <input type="date" name="departure" id="departure" />
+  </div>
+  <div class="form-control">
+    <label for=""></label>
+    <button type="submit">Search Availability</button>
+  </div>
+</form>
+
 {{ end }}

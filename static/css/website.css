@@ -39,3 +39,17 @@ h6 {
 
 .content {
 }
+
+.form-control {
+  margin: 16px 0;
+  display: flex;
+  gap: 4px;
+}
+
+.form-control label {
+  flex-basis: 120px;
+}
+
+.form-control input {
+  flex-basis: 180px;
+}

@@ -1,5 +1,27 @@
 {{ template "base" . }}
 
 {{ define "content" }}
-
+<form class="make-reservation-form" action="/book-reservation" method="post">
+  <h2>Make Reservation</h2>
+  <div class="form-control">
+    <label for="first_name">First Name:</label>
+    <input type="text" name="first_name" id="first_name" />
+  </div>
+  <div class="form-control">
+    <label for="last_name">Last Name:</label>
+    <input type="text" name="last_name" id="last_name" />
+  </div>
+  <div class="form-control">
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" />
+  </div>
+  <div class="form-control">
+    <label for="phone">Phone:</label>
+    <input type="number" name="phone" id="phone" />
+  </div>
+  <div class="form-control">
+    <label for=""></label>
+    <button type="button">Make Reservation</button>
+  </div>
+</form>
 {{ end }}
