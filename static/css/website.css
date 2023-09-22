@@ -53,3 +53,7 @@ h6 {
 .form-control input {
   flex-basis: 180px;
 }
+
+.form-control .error {
+  color: #d80032;
+}

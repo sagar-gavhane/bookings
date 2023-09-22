@@ -1,27 +1,62 @@
 {{ template "base" . }}
 
 {{ define "content" }}
-<form class="make-reservation-form" action="/book-reservation" method="post">
+{{$reservation := index .Data "reservation"}}
+
+<form class="make-reservation-form" action="/make-reservation" method="post">
+  <input type="hidden" name="csrf_token" value="{{.CSRFToken }}" />
   <h2>Make Reservation</h2>
   <div class="form-control">
     <label for="first_name">First Name:</label>
-    <input type="text" name="first_name" id="first_name" />
+    <input
+      type="text"
+      name="first_name"
+      id="first_name"
+      value="{{ $reservation.FirstName }}"
+    />
+    {{with .Form.Errors.Get "first_name"}}
+    <span class="error">{{.}}</span>
+    {{ end }}
   </div>
   <div class="form-control">
     <label for="last_name">Last Name:</label>
-    <input type="text" name="last_name" id="last_name" />
+    <input
+      type="text"
+      name="last_name"
+      id="last_name"
+      value="{{ $reservation.LastName }}"
+    />
+    {{with .Form.Errors.Get "last_name"}}
+    <span class="error">{{.}}</span>
+    {{ end }}
   </div>
   <div class="form-control">
     <label for="email">Email:</label>
-    <input type="email" name="email" id="email" />
+    <input
+      type="email"
+      name="email"
+      id="email"
+      value="{{ $reservation.Email }}"
+    />
+    {{with .Form.Errors.Get "email"}}
+    <span class="error">{{.}}</span>
+    {{ end }}
   </div>
   <div class="form-control">
     <label for="phone">Phone:</label>
-    <input type="number" name="phone" id="phone" />
+    <input
+      type="number"
+      name="phone"
+      id="phone"
+      value="{{ $reservation.Phone }}"
+    />
+    {{with .Form.Errors.Get "phone"}}
+    <span class="error">{{.}}</span>
+    {{ end }}
   </div>
   <div class="form-control">
     <label for=""></label>
-    <button type="button">Make Reservation</button>
+    <button type="submit">Make Reservation</button>
   </div>
 </form>
 {{ end }}
