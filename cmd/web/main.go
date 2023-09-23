@@ -1,14 +1,18 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
 	"github.com/sagar-gavhane/bookings/internal/config"
 	"github.com/sagar-gavhane/bookings/internal/handlers"
+	"github.com/sagar-gavhane/bookings/internal/helpers"
+	"github.com/sagar-gavhane/bookings/internal/models"
 	"github.com/sagar-gavhane/bookings/internal/render"
 )
 
@@ -16,11 +20,20 @@ const portNumber = ":8080"
 
 var app config.AppConfig
 var session *scs.SessionManager
+var infoLog *log.Logger
+var errorLog *log.Logger
 
 // main is the main function
 func main() {
+	gob.Register(models.Reservation{})
 	// change this to true when in production
 	app.InProduction = false
+
+	infoLog = log.New(os.Stdout, "INFO:\t", log.Ldate|log.Ltime)
+	app.InfoLog = infoLog
+
+	errorLog = log.New(os.Stdout, "ERROR:\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = errorLog
 
 	// set up the session
 	session = scs.New()
@@ -41,8 +54,8 @@ func main() {
 
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
-
 	render.NewTemplates(&app)
+	helpers.NewHelpers(&app)
 
 	fmt.Println(fmt.Sprintf("Staring application on port %s", portNumber))
 

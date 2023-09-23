@@ -24,6 +24,18 @@
 
   <body>
     <div class="site">
+      {{ with.Error }}
+      <div class="alert-error">
+        {{.}}
+      </div>
+      {{ end }}
+
+      {{ with.Flash }}
+      <div class="alert-flash">
+        {{.}}
+      </div>
+      {{ end }}
+
       <ul class="nav">
         <li>
           <a href="/">Home</a>

@@ -8,6 +8,7 @@ import (
 
 	"github.com/sagar-gavhane/bookings/internal/config"
 	"github.com/sagar-gavhane/bookings/internal/forms"
+	"github.com/sagar-gavhane/bookings/internal/helpers"
 	"github.com/sagar-gavhane/bookings/internal/models"
 	"github.com/sagar-gavhane/bookings/internal/render"
 )
@@ -98,10 +99,26 @@ func (m *Repository) PostMakeReservation(w http.ResponseWriter, r *http.Request)
 		})
 		return
 	}
+
+	m.App.Session.Put(r.Context(), "reservation", reservation)
+	http.Redirect(w, r, "/reservation-summary", http.StatusSeeOther)
 }
 
 func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
-	//
+	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
+
+	if !ok {
+		m.App.Session.Put(r.Context(), "error", "cannot get item from session.")
+		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		return
+	}
+
+	data := make(map[string]interface{})
+	data["reservation"] = reservation
+
+	render.RenderTemplate(w, r, "reservation-summary.page.tmpl", &models.TemplateData{
+		Data: data,
+	})
 }
 
 func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
@@ -138,6 +155,7 @@ func (m *Repository) SearchAvailabilityJson(w http.ResponseWriter, r *http.Reque
 
 	if err != nil {
 		log.Fatal(err)
+		helpers.ServerError(w, err)
 		return
 	}
 
